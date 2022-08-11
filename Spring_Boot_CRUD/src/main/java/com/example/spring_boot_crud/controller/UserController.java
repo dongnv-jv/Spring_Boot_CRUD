@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -48,15 +49,44 @@ public class UserController {
         model.addAttribute("list", list);
         return "display";
     }
+
     @GetMapping("/delete")
-    public String delete(Model model,@RequestParam("id")
+    public String delete(Model model, @RequestParam("id")
     int id) {
         iuserService.delete(id);
         return "redirect:/display";
     }
+
     @GetMapping(value = {"/", "/home"})
     public String homepage() {
         return "home";
     }
 
+    @PostMapping("/update")
+    public String update(@RequestParam("username") String username, @RequestParam("password")
+    String password, @RequestParam("email")
+                         String email, @RequestParam("fullname")
+                         String fullname, @RequestParam("dayOfbirth")
+                         String dayOfbirth,
+                         @RequestParam("id")
+                         int id) {
+        UserPojo userPojo = new UserPojo();
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        userPojo.setPassword(passwordEncoder.encode(password));
+        userPojo.setUsername(username);
+        userPojo.setEmail(email);
+        userPojo.setFullname(fullname);
+        userPojo.setDayOfBirth(dayOfbirth);
+        userPojo.setId(id);
+        iuserService.add(userPojo);
+        return "redirect:/display";
+    }
+
+    @GetMapping("/update")
+    public String edit(HttpServletRequest request, @RequestParam("id")
+    int id) {
+        request.setAttribute("id", id);
+        return "update";
+
+    }
 }

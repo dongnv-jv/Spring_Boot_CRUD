@@ -9,3 +9,4 @@ public interface IuserService {
     List<UserPojo> getAll();
     void delete(int id);
 }
+
