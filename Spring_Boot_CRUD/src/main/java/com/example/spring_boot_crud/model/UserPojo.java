@@ -16,5 +16,10 @@ public class UserPojo {
     private String username;
     @Column(name = "admin_password")
     private String password;
-
+    @Column(name = "email")
+    private String email;
+    @Column(name = "dayofbirth")
+    private String dayOfBirth;
+    @Column(name = "fullname")
+    private String fullname;
 }
