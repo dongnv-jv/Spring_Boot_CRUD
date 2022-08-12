@@ -24,9 +24,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-
     }
-
     .input {
         margin: 0 auto;
         width: 45%;
@@ -38,17 +36,20 @@
 </head>
 <body>
 <div class="input">
-    <form action="/add" method="post">
+    <form action="/add" th:object="${user}" method="post" >
      <p>Enter Username</p>
-     <input type="text" name="username"/>
+        <span style=" color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+     <input type="text" th:field="*{username}"/>
         <p>Enter Password</p>
-        <input type="password" name="password"/>
+        <span style=" color:red" th:if="${#fields.hasErrors('dummyPassword')}" th:errors="*{dummyPassword}"></span>
+        <input type="password" th:field="*{dummyPassword}" />
         <p>Enter Email</p>
-        <input type="text" name="email"/><br>
+<!--        <span style=" color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+        <input type="text" th:field="*{email}" /><br>
         <p>Enter Fullname</p>
-        <input type="text" name="fullname"/><br>
+        <input type="text" th:field="*{fullname}"/><br>
         <p>Enter Day of birth</p>
-        <input type="text" name="dayOfbirth"/><br>
+        <input type="text" th:field="*{dayOfBirth}"/><br>
         <input type="submit" name="Add" />
     </form>
 </div>

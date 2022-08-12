@@ -3,6 +3,9 @@ package com.example.spring_boot_crud.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -13,9 +16,14 @@ public class UserPojo {
     @Column(name = "admin_id")
     private int id;
     @Column(name = "admin_username")
+    @NotBlank(message = "Username should not be empty")
     private String username;
+    @Transient
+    @Size(max = 15, min = 6, message = "Password should be more than 6 character !")
+    private String dummyPassword;
     @Column(name = "admin_password")
     private String password;
+    @Email(message = "Email is not format")
     @Column(name = "email")
     private String email;
     @Column(name = "dayofbirth")

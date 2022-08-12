@@ -43,7 +43,7 @@
             <th th:text="${user.dayOfBirth}"></th>
             <th>
                 <a th:href="@{http://localhost:8080/delete(id=${user.id})}"
-                   onclick="return confirm('Are you sure you want to delete this item?');">Delete  </a>
+                   onclick="return confirm('Are you sure you want to delete this item?');">Delete  </a> &ensp;
                 <a th:href="@{http://localhost:8080/update(id=${user.id})}"> Edit</a>
             </th>
         </tr>
