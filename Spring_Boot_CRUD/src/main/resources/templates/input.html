@@ -44,7 +44,7 @@
         <span style=" color:red" th:if="${#fields.hasErrors('dummyPassword')}" th:errors="*{dummyPassword}"></span>
         <input type="password" th:field="*{dummyPassword}" />
         <p>Enter Email</p>
-<!--        <span style=" color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+        <span style=" color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         <input type="text" th:field="*{email}" /><br>
         <p>Enter Fullname</p>
         <input type="text" th:field="*{fullname}"/><br>

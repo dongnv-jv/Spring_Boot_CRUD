@@ -1,5 +1,6 @@
 package com.example.spring_boot_crud.model;
 
+import com.example.spring_boot_crud.validation.ValidEmails;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class UserPojo {
     private String dummyPassword;
     @Column(name = "admin_password")
     private String password;
-    @Email(message = "Email is not format")
+    @ValidEmails(message = "Email is not format")
     @Column(name = "email")
     private String email;
     @Column(name = "dayofbirth")
