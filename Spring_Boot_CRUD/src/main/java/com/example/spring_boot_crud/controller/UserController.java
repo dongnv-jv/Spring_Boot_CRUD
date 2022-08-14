@@ -43,8 +43,22 @@ public class UserController {
         model.addAttribute("list", list);
         return "display";
     }
+
+//    @GetMapping("/displayByName")
+//    public String displayByName(Model model) {
+//        List<UserPojo> list = iuserService.findByName();
+//        model.addAttribute("listByName", list);
+//        return "display";
+//    }
+
+    @PostMapping("/displayByName")
+    public String displayByName(Model model,@RequestParam("findname") String name) {
+        List<UserPojo> list = iuserService.findByName(name);
+        model.addAttribute("listByName", list);
+        return "display";
+    }
     @GetMapping("/delete")
-    public String delete(Model model, @RequestParam("id")
+    public String delete( @RequestParam("id")
     int id) {
         iuserService.delete(id);
         return "redirect:/display";

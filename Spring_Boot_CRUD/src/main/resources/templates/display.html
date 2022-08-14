@@ -22,6 +22,13 @@
     </style>
 </head>
 <body>
+<br><br>
+<form action="/displayByName" method="post">
+    <p>Find By Name</p>
+    <input type="text" name="findname"/>
+    <input type="submit" value="Find"/>
+</form>
+<br>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -34,22 +41,37 @@
     </tr>
     </thead>
     <tbody>
-    <h4>
-        <tr th:each="user: ${list}">
-            <th th:text="${user.id}"></th>
-            <th th:text="${user.username}"></th>
-            <th th:text="${user.email}"></th>
-            <th th:text="${user.fullname}"></th>
-            <th th:text="${user.dayOfBirth}"></th>
+   <div>
+        <tr th:each="user: ${list}" >
+            <th th:text="${user.id}"  ></th>
+            <th th:text="${user.username}" ></th>
+            <th th:text="${user.email}"  ></th>
+            <th th:text="${user.fullname}" ></th>
+            <th th:text="${user.dayOfBirth}"  ></th>
             <th>
                 <a th:href="@{http://localhost:8080/delete(id=${user.id})}"
-                   onclick="return confirm('Are you sure you want to delete this item?');">Delete  </a> &ensp;
+                   onclick="return confirm('Are you sure you want to delete this item?');">Delete </a> &ensp;
                 <a th:href="@{http://localhost:8080/update(id=${user.id})}"> Edit</a>
             </th>
         </tr>
-    </h4>
+   </div>
+    <div>
+        <tr th:each="userByName: ${listByName}">
+            <th  th:text="${userByName.id}" ></th>
+            <th   th:text="${userByName.username}"></th>
+            <th   th:text="${userByName.email}"></th>
+            <th  th:text="${userByName.fullname}"></th>
+            <th   th:text="${userByName.dayOfBirth}"></th>
+            <th>
+                <a th:href="@{http://localhost:8080/delete(id=${userByName.id})}"
+                   onclick="return confirm('Are you sure you want to delete this item?');">Delete </a> &ensp;
+                <a th:href="@{http://localhost:8080/update(id=${userByName.id})}"> Edit</a>
+            </th>
+        </tr>
+    </div>
     </tbody>
 </table>
+
 <div class="demo">
     <a class="button" href="/logout">Logout</a>
 </div>
