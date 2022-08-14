@@ -10,7 +10,7 @@ public class ValidEmail implements ConstraintValidator<ValidEmails,String> {
     }
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if(s.matches("(.*)@gmail(.*)")){
+        if(s.matches("(.*)@gmail(.*)") || s.matches("(.*).com(.*)")){
            return true;
         } else
             return false;

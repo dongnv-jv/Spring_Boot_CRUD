@@ -17,14 +17,16 @@ public class UserPojo {
     @Column(name = "admin_id")
     private int id;
     @Column(name = "admin_username")
-    @NotBlank(message = "Username should not be empty")
+    @NotBlank(message = "Username must not be empty")
+    @Size(min=4,message = "Length of Username must be at least 4 characters")
     private String username;
     @Transient
     @Size(max = 15, min = 6, message = "Password should be more than 6 character !")
     private String dummyPassword;
     @Column(name = "admin_password")
     private String password;
-    @ValidEmails(message = "Email is not format")
+//    @ValidEmails(message = "Email is not format")
+    @Email(message = "Email is not format")
     @Column(name = "email")
     private String email;
     @Column(name = "dayofbirth")

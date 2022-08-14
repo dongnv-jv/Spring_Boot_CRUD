@@ -37,6 +37,7 @@
 <body>
 <div class="input">
     <form action="/add" th:object="${user}" method="post" >
+
      <p>Enter Username</p>
         <span style=" color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
      <input type="text" th:field="*{username}"/>

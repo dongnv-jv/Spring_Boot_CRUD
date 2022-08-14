@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IUserRepository extends JpaRepository<UserPojo,Integer> {
-    @Query("select u from UserPojo u where u.fullname like %?1%")
+    @Query("select u from UserPojo u where upper(u.fullname) like %?1%")
     List<UserPojo> findByName(String name);
 }
