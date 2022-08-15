@@ -43,3 +43,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 }
+// Test branch jwt_security
