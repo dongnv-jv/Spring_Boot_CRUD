@@ -29,15 +29,22 @@ public class UserController {
         model.addAttribute("user", userPojo);
         return "input";
     }
+
     @PostMapping("/add")
-    public String add(@Valid  @ModelAttribute("user") UserPojo userPojo, BindingResult bindingResult) {
+    public String add(@Valid @ModelAttribute("user") UserPojo userPojo, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "input";
-        }  else
+        } else if (userPojo.getId() <= 0) {
+            userPojo.setPassword(passwordEncoder.encode(userPojo.getDummyPassword()));
+            iuserService.add(userPojo);
+            return "home";
+        } else
             userPojo.setPassword(passwordEncoder.encode(userPojo.getDummyPassword()));
         iuserService.add(userPojo);
-        return "home";
+        return "redirect:/display";
     }
+
     @GetMapping("/display")
     public String display(Model model) {
 
@@ -47,38 +54,40 @@ public class UserController {
     }
 
     @PostMapping("/displayByName")
-    public String displayByName(Model model,@RequestParam("findname") String name) {
+    public String displayByName(Model model, @RequestParam("findname") String name) {
         List<UserPojo> list = iuserService.findByName(name.toUpperCase());
         model.addAttribute("listByName", list);
         return "display";
     }
+
     @GetMapping("/delete")
-    public String delete( @RequestParam("id")
-    int id) {
+    public String delete(@RequestParam("id")
+                         int id) {
         iuserService.delete(id);
         return "redirect:/display";
     }
+
     @GetMapping(value = {"/"})
     public String homepage() {
         return "home";
     }
 
-    @PostMapping("/update")
-    public String update(@Valid  @ModelAttribute("user") UserPojo userPojo, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-
-            return "input";
-        } else
-            userPojo.setPassword(passwordEncoder.encode(userPojo.getDummyPassword()));
-        iuserService.add(userPojo);
-        return "redirect:/display";
-    }
+    //    @PostMapping("/update")
+//    public String update(@Valid  @ModelAttribute("user") UserPojo userPojo, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//
+//            return "input";
+//        } else
+//            userPojo.setPassword(passwordEncoder.encode(userPojo.getDummyPassword()));
+//        iuserService.add(userPojo);
+//        return "redirect:/display";
+//    }
     @GetMapping("/update")
-    public String edit(HttpServletRequest request, @RequestParam("id")
-    int id, Model model) {
+    public String edit(@RequestParam("id")
+                       int id, Model model) {
         UserPojo userPojo = new UserPojo();
+        userPojo.setId(id);
         model.addAttribute("user", userPojo);
-        request.setAttribute("id", id);
-        return "update";
+        return "input";
     }
 }
