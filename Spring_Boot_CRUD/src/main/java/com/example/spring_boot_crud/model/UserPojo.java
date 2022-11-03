@@ -17,7 +17,7 @@ public class UserPojo {
     @Column(name = "admin_id")
     private int id;
     @Column(name = "admin_username")
-    @NotBlank(message = "Username must not be empty")
+//    @NotBlank(message = "Username must not be empty")
     @Size(min=4,message = "Length of Username must be at least 4 characters")
     private String username;
     @Transient
@@ -26,7 +26,8 @@ public class UserPojo {
     @Column(name = "admin_password")
     private String password;
 //    @ValidEmails(message = "Email is not format")
-    @Email(message = "Email is not format")
+    @Email(message = "Email is invalid")
+    @NotBlank(message = "Email must not be empty")
     @Column(name = "email")
     private String email;
     @Column(name = "dayofbirth")

@@ -3,6 +3,9 @@ package com.example.spring_boot_crud.service;
 import com.example.spring_boot_crud.model.UserPojo;
 import com.example.spring_boot_crud.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,5 +34,11 @@ public class UserService implements IuserService {
     @Override
     public List<UserPojo> findByName(String name) {
         return iUserRepository.findByName(name);
+    }
+
+    @Override
+    public Page<UserPojo> findAll(int pages,int size) {
+        Pageable page = PageRequest.of(pages, size);
+        return iUserRepository.findAll(page);
     }
 }
